@@ -1,0 +1,147 @@
+/* login.css의 스타일을 상속받되, register 페이지 특화 스타일 정의 */
+
+.register-wrapper {
+    flex: 2.5;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+}
+
+/* [핵심] 좌우 배치 및 상단 정렬 */
+.register-content {
+    display: flex;
+    flex-direction: row; /* 가로 배치 */
+    align-items: flex-start; /* 상단 정렬 (Full Name 라인부터 시작) */
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.input-section {
+    flex: 1;
+    /* 기본적으로 input-group들이 수직으로 쌓임 */
+}
+
+.agreement-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* 상단 여백(margin-top)이 있다면 제거하거나 0으로 설정하여 높이를 맞춤 */
+    margin-top: 0;
+}
+
+/* 입력 그룹 간격 */
+.input-group {
+    margin-bottom: 15px;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+/* 모바일 번호 입력 필드 스타일 */
+.mobile-input-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px; /* input과 통일 */
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.flag-select {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+    border-right: 1px solid #ddd;
+    color: #555;
+    font-size: 0.8rem;
+}
+
+.mobile-input-box input {
+    border: none;
+    border-radius: 0;
+}
+
+/* 동의서 스타일 */
+.agreement-box {
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.agreement-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+    min-height: 100px;
+    background-color: #f0f0f0;
+}
+
+.check-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Alert Box 스타일 */
+.alert-box {
+    background-color: #e53935; /* 에러는 빨간색 계열이 일반적임 */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3);
+}
+
+.alert-content strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.alert-close {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.submit-area {
+    text-align: right;
+}
+.register-btn {
+    padding: 15px 50px;
+    font-size: 1.2rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .register-content {
+        flex-direction: column;
+    }
+}

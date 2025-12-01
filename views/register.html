@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation System Register</title>
+    <link rel="stylesheet" href="../static/css/login.css"> <!-- 공통 스타일 재사용 -->
+    <link rel="stylesheet" href="../static/css/register.css"> <!-- register.css 경로 주의 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- 헤더 영역 -->
+<header class="header">
+    <div class="header-left">
+        <a href="/" class="nav-btn logo-btn">Welcome to Reservation System</a>
+    </div>
+    <div class="header-right">
+        <a href="/" class="nav-btn">Home</a>
+        <a href="#" class="nav-btn">Contact Us</a>
+        <a href="../views/login.html" class="btn btn-outline">Sign in</a>
+        <a href="../views/register.html" class="btn btn-black">Sign Up</a>
+    </div>
+</header>
+
+<!-- 메인 콘텐츠 영역 -->
+<main class="main-container">
+
+    <!-- 왼쪽 + 가운데: 회원가입 폼 영역 -->
+    <section class="register-wrapper">
+        <form id="registerForm">
+            <div class="register-content">
+                <!-- 왼쪽: 입력 필드 -->
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="full_name" placeholder="홍길동" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="홍길동@gmail.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="mobile">Mobile Number</label>
+                        <div class="mobile-input-box">
+                            <div class="flag-select">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_South_Korea.svg" alt="KR" width="24">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <input type="tel" id="mobile" name="mobile_number" placeholder="010-1234-5678" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="studentId">Student ID Number</label>
+                        <input type="text" id="studentId" name="student_id" placeholder="200012345" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="message">Leave a Message for Us</label>
+                        <textarea id="message" name="message" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 동의서 이미지 및 체크 -->
+                <div class="agreement-section">
+                    <!-- 개인정보 수집 동의 (필수) -->
+                    <div class="agreement-box">
+                        <img src="../static/image/agreement_privacy.png" alt="개인정보 수집동의 내용" class="agreement-img">
+                        <div class="check-group">
+                            <label class="radio-label">
+                                <input type="radio" name="privacy_agree" value="yes" required> YES
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="privacy_agree" value="no"> NO
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 마케팅 활용 동의 (선택) -->
+                    <div class="agreement-box">
+                        <img src="../static/image/agreement_marketing.png" alt="마케팅 및 광고활용 동의 내용" class="agreement-img">
+                        <div class="check-group">
+                            <label class="radio-label">
+                                <input type="radio" name="marketing_agree" value="yes"> YES
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="marketing_agree" value="no" checked> NO
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alert Box (처음엔 숨김) -->
+            <div id="errorAlert" class="alert-box" style="display: none;">
+                <div class="alert-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="alert-content">
+                    <strong id="alertTitle">Alert title</strong>
+                    <p id="alertMessage">Something went wrong.</p>
+                </div>
+                <button type="button" class="alert-close" id="closeAlert">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- 등록 버튼 -->
+            <div class="submit-area">
+                <button type="submit" class="btn btn-black register-btn">Register</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- 오른쪽: 사이드바 -->
+    <aside class="sidebar">
+        <div class="sidebar-box">
+            <h3>Here to Find</h3>
+            <div class="map-placeholder">
+                <!-- 지도 이미지 경로 확인 -->
+                <img src="../static/image/map_placeholder.png" alt="Map Location" style="width: 100%; height: auto;">
+            </div>
+            <p class="phone-number">031-330-4114</p>
+        </div>
+
+        <div class="sidebar-box">
+            <h3>Official Websites</h3>
+            <ul class="website-list">
+                <li>
+                    <div class="site-icon" style="background-color: #800000;"></div>
+                    <div class="site-info">
+                        <strong>Natural Sciences</strong>
+                        <a href="#" class="go-link"><i class="fas fa-external-link-alt"></i> Go to Site</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="site-icon" style="background-color: #003366;"></div>
+                    <div class="site-info">
+                        <strong>Humanities</strong>
+                        <a href="#" class="go-link"><i class="fas fa-external-link-alt"></i> Go to Site</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="site-icon" style="background-color: #333;"></div>
+                    <div class="site-info">
+                        <strong>Commerce and Economics</strong>
+                        <a href="#" class="go-link"><i class="fas fa-external-link-alt"></i> Go to Site</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+</main>
+
+<!-- 하단 이미지 영역 -->
+<div class="bottom-images">
+    <img src="../static/image/build.png" alt="Building View" class="build-img">
+    <img src="../static/image/footer.png" alt="Footer Information" class="footer-img">
+</div>
+
+<script src="../static/js/register.js"></script>
+</body>
+</html>

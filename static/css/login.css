@@ -1,0 +1,373 @@
+/* 기본 리셋 및 폰트 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f5f5f5; /* 연한 회색 배경 */
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* 유틸리티 클래스 */
+.full-width {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+/* --- 헤더 스타일 --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.header-left .logo-btn {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.header-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-btn {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.btn {
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.btn-outline {
+    border: 1px solid #333;
+    color: #333;
+    background-color: transparent;
+}
+
+.btn-black {
+    background-color: #111;
+    color: #fff;
+}
+
+.btn-gray {
+    background-color: #bdbdbd; /* 비활성화 느낌의 회색 */
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 15px;
+    border-radius: 30px; /* 둥근 버튼 */
+    margin-top: 20px;
+}
+
+.btn-gray:hover {
+    background-color: #a0a0a0;
+}
+
+.btn-white {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 1rem;
+    padding: 15px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* --- 메인 레이아웃 --- */
+.main-container {
+    display: flex;
+    max-width: 1600px;
+    margin: 40px auto;
+    padding: 0 40px;
+    gap: 60px;
+    min-height: 600px;
+}
+
+/* 1. 왼쪽: 로그인 섹션 */
+.login-section {
+    flex: 1;
+    max-width: 400px;
+}
+
+.login-section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.form-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+}
+
+.reset-pass-btn {
+    font-size: 0.85rem;
+    text-decoration: underline;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-password {
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.divider span {
+    padding: 0 15px;
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.terms-text {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.terms-text a {
+    text-decoration: underline;
+    color: #333;
+}
+
+/* 중앙 구분선 */
+.vertical-divider {
+    width: 1px;
+    background-color: #ddd;
+    margin-top: 60px; /* 상단 여백 */
+}
+
+/* 2. 가운데: 계정 생성 섹션 */
+.create-account-section {
+    flex: 1.2;
+    padding-top: 0; /* 헤더 높이 고려 */
+}
+
+.create-account-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.description-text {
+    margin-bottom: 40px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.lorem-block p {
+    margin-bottom: 20px;
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.create-account-btn {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 18px 40px;
+    border-radius: 30px; /* 둥근 버튼 */
+    text-align: center;
+    min-width: 250px;
+}
+
+/* 3. 오른쪽: 사이드바 */
+.sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.sidebar-box {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.sidebar-box h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #333; /* 제목 밑줄 스타일 */
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.map-placeholder img {
+    width: 100%;
+    height: 160px;
+    border-radius: 4px;
+}
+
+.phone-number {
+    font-weight: 700;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.website-list {
+    list-style: none;
+}
+
+.website-list li {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+}
+
+.site-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.site-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.site-info strong {
+    font-size: 0.9rem;
+}
+
+.go-link {
+    font-size: 0.75rem;
+    color: #666;
+    text-decoration: underline;
+}
+
+/* --- 하단 이미지 영역 --- */
+.bottom-images {
+    margin-top: 60px;
+}
+
+.build-img {
+/* image 25 */
+    width: 100%;
+    height: 80%;
+    left: 0px;
+    top: 1272px;
+
+}
+/* image 25 */
+.footer-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #fff; 
+}
+
+/* 반응형 처리 (모바일) */
+@media (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .vertical-divider {
+        display: none;
+    }
+    
+    .sidebar {
+        width: 100%;
+        display: flex;
+        gap: 20px;
+    }
+    
+    .sidebar-box {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        flex-direction: column;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

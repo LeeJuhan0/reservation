@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation System Login</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- 헤더 영역 -->
+<header class="header">
+    <div class="header-left">
+        <!-- 로고 클릭 시 홈으로 (보통 로그인 페이지면 자기 자신이나 루트) -->
+        <a href="/auth/login" class="nav-btn logo-btn">Welcome to Reservation System</a>
+    </div>
+    <div class="header-right">
+        <a href="/" class="nav-btn">Home</a>
+        <a href="#" class="nav-btn">Contact Us</a>
+        <!-- 컨트롤러 라우트로 변경 -->
+        <a href="/auth/login" class="btn btn-outline">Sign in</a>
+        <a href="/auth/register" class="btn btn-black">Sign Up</a>
+    </div>
+</header>
+
+<!-- 메인 콘텐츠 영역 -->
+<main class="main-container">
+
+    <!-- 1. 왼쪽: 로그인 폼 -->
+    <section class="login-section">
+        <h2>Sign in</h2>
+        <div class="form-header">
+            <a href="#" class="reset-pass-btn">Reset password</a>
+        </div>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="" required>
+            </div>
+
+            <div class="input-group">
+                <div class="label-row">
+                    <label for="password">Password</label>
+                    <button type="button" class="toggle-password" id="togglePassword">
+                        <i class="far fa-eye-slash"></i> Hide
+                    </button>
+                </div>
+                <input type="password" id="password" placeholder="" required>
+            </div>
+
+            <button type="submit" class="btn btn-gray full-width">Sign in</button>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <button type="button" class="btn btn-white full-width google-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="G" class="google-icon">
+                Continue with Google
+            </button>
+
+            <div class="terms-text">
+                By continuing, you agree to the <a href="#">Terms of use</a> and <a href="#">Privacy Policy.</a>
+            </div>
+        </form>
+    </section>
+
+    <!-- 구분선 -->
+    <div class="vertical-divider"></div>
+
+    <!-- 2. 가운데: 계정 생성 안내 -->
+    <section class="create-account-section">
+        <h2>Create an account</h2>
+        <p class="description-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis maximus
+        </p>
+
+        <div class="lorem-block">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis maximus</p>
+            <!-- 중복 텍스트 생략 가능 -->
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lobortis maximus</p>
+        </div>
+
+        <!-- [중요] 컨트롤러 라우트로 변경 -->
+        <a href="/auth/register" class="btn btn-black create-account-btn">Create an account</a>
+    </section>
+
+    <!-- 3. 오른쪽: 사이드바 -->
+    <aside class="sidebar">
+        <div class="sidebar-box">
+            <h3>Here to Find</h3>
+            <div class="map-placeholder">
+                <img src="https://simg.pstatic.net/static.map/v2/map/staticmap.bin?center=127.2658394,37.3360003&w=632&h=160&level=13&scale=2" alt="Map Location">
+            </div>
+            <p class="phone-number">031-330-4114</p>
+        </div>
+
+        <div class="sidebar-box">
+            <h3>Official Websites</h3>
+            <ul class="website-list">
+                <li>
+                    <div class="site-icon" style="background-color: #800000;"></div>
+                    <div class="site-info">
+                        <strong>Natural Sciences</strong>
+                        <a href="#" class="go-link"><i class="fas fa-external-link-alt"></i> Go to Site</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="site-icon" style="background-color: #003366;"></div>
+                    <div class="site-info">
+                        <strong>humanities</strong>
+                        <a href="#" class="go-link"><i class="fas fa-external-link-alt"></i> Go to Site</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="site-icon" style="background-color: #333;"></div>
+                    <div class="site-info">
+                        <strong>Commerce and Economics</strong>
+                        <a href="#" class="go-link"><i class="fas fa-external-link-alt"></i> Go to Site</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+</main>
+
+<!-- 하단 이미지 영역 -->
+<div class="bottom-images">
+    <img src="../static/image/build.png" alt="Building View" class="build-img">
+    <img src="../static/image/footer.png" alt="Footer Information" class="footer-img">
+</div>
+
+<script src="../static/js/login.js"></script>
+</body>
+</html>
