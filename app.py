@@ -9,10 +9,9 @@ from controllers.reservation_controller import reservation_bp
 app = Flask(__name__, template_folder='views', static_folder='static')
 app.config.from_object(Config)
 
-# [중요] MySQL 객체에 앱 연결하기
 mysql.init_app(app)
 
-# 컨트롤러 등록
+# 컨트롤러
 app.register_blueprint(auth_bp)
 app.register_blueprint(reservation_bp)
 
@@ -20,7 +19,6 @@ app.register_blueprint(reservation_bp)
 def index():
     return render_template('login.html')
 
-# [진단용] 이제는 extensions를 안 쓰지만 연결 테스트는 가능
 @app.route('/test')
 def test_connection():
     try:

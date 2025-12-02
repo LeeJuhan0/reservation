@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation System Register</title>
-    <link rel="stylesheet" href="../static/css/login.css"> <!-- 공통 스타일 재사용 -->
-    <link rel="stylesheet" href="../static/css/register.css"> <!-- register.css 경로 주의 -->
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="../static/css/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-<!-- 헤더 영역 -->
+<!-- 헤더 -->
 <header class="header">
     <div class="header-left">
         <a href="/" class="nav-btn logo-btn">Welcome to Reservation System</a>
@@ -19,19 +19,19 @@
     <div class="header-right">
         <a href="/" class="nav-btn">Home</a>
         <a href="#" class="nav-btn">Contact Us</a>
-        <a href="../views/login.html" class="btn btn-outline">Sign in</a>
-        <a href="../views/register.html" class="btn btn-black">Sign Up</a>
+        <a href="/auth/login" class="btn btn-outline">Sign in</a>
+        <a href="/auth/register" class="btn btn-black">Sign Up</a>
     </div>
 </header>
 
-<!-- 메인 콘텐츠 영역 -->
+<!-- 메인 -->
 <main class="main-container">
 
-    <!-- 왼쪽 + 가운데: 회원가입 폼 영역 -->
+    <!--  회원가입폼 -->
     <section class="register-wrapper">
         <form id="registerForm">
             <div class="register-content">
-                <!-- 왼쪽: 입력 필드 -->
+                <!-- 입력 -->
                 <div class="input-section">
                     <div class="input-group">
                         <label for="fullName">Full Name</label>
@@ -70,9 +70,9 @@
                     </div>
                 </div>
 
-                <!-- 오른쪽: 동의서 이미지 및 체크 -->
+                <!-- 동의서  -->
                 <div class="agreement-section">
-                    <!-- 개인정보 수집 동의 (필수) -->
+                    <!-- 개인정보 수집 -->
                     <div class="agreement-box">
                         <img src="../static/image/agreement_privacy.png" alt="개인정보 수집동의 내용" class="agreement-img">
                         <div class="check-group">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
 
-                    <!-- 마케팅 활용 동의 (선택) -->
+                    <!-- 마케팅 활용 -->
                     <div class="agreement-box">
                         <img src="../static/image/agreement_marketing.png" alt="마케팅 및 광고활용 동의 내용" class="agreement-img">
                         <div class="check-group">
@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <!-- Alert Box (처음엔 숨김) -->
+            <!-- Alert -->
             <div id="errorAlert" class="alert-box" style="display: none;">
                 <div class="alert-icon">
                     <i class="fas fa-exclamation-circle"></i>
@@ -114,20 +114,20 @@
                 </button>
             </div>
 
-            <!-- 등록 버튼 -->
+            <!-- 등록  -->
             <div class="submit-area">
                 <button type="submit" class="btn btn-black register-btn">Register</button>
             </div>
         </form>
     </section>
 
-    <!-- 오른쪽: 사이드바 -->
+    <!-- 사이드바 -->
     <aside class="sidebar">
         <div class="sidebar-box">
             <h3>Here to Find</h3>
             <div class="map-placeholder">
-                <!-- 지도 이미지 경로 확인 -->
-                <img src="../static/image/map_placeholder.png" alt="Map Location" style="width: 100%; height: auto;">
+                <!-- 지도 이미지 -->
+                <img src="https://simg.pstatic.net/static.map/v2/map/staticmap.bin?center=127.2658394,37.3360003&w=632&h=160&level=13&scale=2" alt="Map Location">
             </div>
             <p class="phone-number">031-330-4114</p>
         </div>
@@ -162,7 +162,7 @@
 
 </main>
 
-<!-- 하단 이미지 영역 -->
+<!-- 하단 이미지 -->
 <div class="bottom-images">
     <img src="../static/image/build.png" alt="Building View" class="build-img">
     <img src="../static/image/footer.png" alt="Footer Information" class="footer-img">

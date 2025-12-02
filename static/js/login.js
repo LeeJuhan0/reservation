@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (type === 'text') {
                 icon.classList.remove('fa-eye-slash');
                 icon.classList.add('fa-eye');
-                togglePasswordBtn.childNodes[2].nodeValue = ' Show'; // 텍스트 변경
+                togglePasswordBtn.childNodes[2].nodeValue = ' Show';
             } else {
                 icon.classList.remove('fa-eye');
                 icon.classList.add('fa-eye-slash');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 로그인 폼 제출 처리
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // 기본 폼 제출 방지
+            e.preventDefault();
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;

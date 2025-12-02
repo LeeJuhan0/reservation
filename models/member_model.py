@@ -1,10 +1,8 @@
-# [중요] flask.current_app 대신 database 파일에서 mysql 가져오기
 from database import mysql
 
 class MemberModel:
     @staticmethod
     def find_by_email(email):
-        # mysql 객체를 바로 사용
         cursor = mysql.connection.cursor()
         query = "SELECT * FROM members WHERE email = %s"
         cursor.execute(query, (email,))
