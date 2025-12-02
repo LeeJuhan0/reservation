@@ -71,6 +71,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
+
 INSERT INTO `members` VALUES (1,'gildong@naver.com','qwer1234','honggildong','010-1234-1234','200001234');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
