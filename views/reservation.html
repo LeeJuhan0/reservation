@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation System - View & Booking</title>
     <link rel="stylesheet" href="../static/css/reservation.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -20,7 +18,7 @@
     <div class="header-right">
         <a href="#" class="nav-link">Home</a>
         <a href="#" class="nav-link active">View & Reservation</a>
-        <a href="/auth/logout" class="nav-link">Sign Out</a> <!-- 로그아웃 링크 수정 -->
+        <a href="/auth/logout" class="nav-link">Sign Out</a>
 
         <div class="user-profile">
             <span id="userName" class="user-name">User Loading...</span>
@@ -29,21 +27,20 @@
     </div>
 </header>
 
-<!-- 메인 컨테이너 -->
 <main class="main-container">
 
-    <!-- 왼쪽 메인 콘텐츠 -->
+    <!-- 메인-->
     <section class="content-area">
 
-        <!-- 상단 컨트롤 바: 건물 및 호실 선택 -->
+        <!-- 상단 컨트롤 -->
         <div class="top-controls">
             <a href="#" class="go-back"><i class="fas fa-chevron-left"></i> Go Back</a>
             <div class="filters">
                 <!-- 건물 선택 -->
                 <select id="buildingSelect" class="custom-select">
-                    <option value="">Select Building</option> <!-- 기본값 -->
+                    <option value="">Select Building</option>
                     <option value="백년관">백년관</option>
-                    <option value="어문학과">어문학과</option>
+                    <option value="어문학관">어문학관</option>
                     <option value="교양관">교양관</option>
                     <option value="자연과학관">자연과학관</option>
                     <option value="인문경상관">인문경상관</option>
@@ -51,42 +48,33 @@
                     <option value="학생회관">학생회관</option>
                 </select>
 
-                <!-- 호실 선택 (1~14번) -->
-                <select id="roomSelect" class="custom-select">
-                    <option value="">Select Room No</option> <!-- 기본값 -->
-                    <option value="1">Room 1</option>
-                    <option value="2">Room 2</option>
-                    <option value="3">Room 3</option>
-                    <option value="4">Room 4</option>
-                    <option value="5">Room 5</option>
-                    <option value="6">Room 6</option>
-                    <option value="7">Room 7</option>
-                    <option value="8">Room 8</option>
-                    <option value="9">Room 9</option>
-                    <option value="10">Room 10</option>
-                    <option value="11">Room 11</option>
-                    <option value="12">Room 12</option>
-                    <option value="13">Room 13</option>
-                    <option value="14">Room 14</option>
+                <!-- 층수선택 -->
+                <select id="floorSelect" class="custom-select">
+                    <option value="">Select Floor</option>
+                    <option value="1">1F</option>
+                    <option value="2">2F</option>
+                    <option value="3">3F</option>
+                    <option value="4">4F</option>
+                    <option value="5">5F</option>
                 </select>
 
-                <!-- 검색 버튼 추가 -->
+                <!-- 검색 버튼 -->
                 <button type="button" id="searchRoomsBtn" class="btn-black-sm" style="margin-left: 10px;">Search Rooms</button>
             </div>
         </div>
 
-        <!-- 룸 리스트 테이블 -->
+        <!-- 룸 리스트 -->
         <div class="table-container">
             <table>
                 <thead>
                 <tr>
-                    <th style="width: 50px;"></th> <!-- 라디오 버튼 열 -->
+                    <th style="width: 50px;"></th>
                     <th>Room No</th>
                     <th>Room Type</th>
                     <th>Room Floor</th>
                     <th>Desk Type</th>
                     <th>Capacity</th>
-                    <th>Status</th> <!-- Availability -> Status -->
+                    <th>Status</th>
                     <th>Remarks</th>
                 </tr>
                 </thead>
@@ -98,7 +86,7 @@
             </table>
         </div>
 
-        <!-- 예약 컨트롤 영역 -->
+        <!-- 예약 -->
         <div class="booking-controls">
             <div class="control-group">
                 <div class="input-wrapper">
@@ -106,11 +94,7 @@
                     <input type="date" id="resDate">
                 </div>
             </div>
-
-            <!-- 시간 입력은 슬롯 검색 조건이 아니라, 예약 확정 시 슬롯에서 선택하므로 검색 조건에서는 제외하는 것이 일반적이나 요청하신 대로 유지 -->
             <div class="control-group" style="display:none;">
-                <!-- 시간 필드는 슬롯 버튼 선택으로 대체되므로 보통 숨기거나 Readonly로 둡니다.
-                     하지만 쿼리에 필요하다면 살려둡니다. 여기서는 일단 숨김 처리했습니다. -->
                 <div class="input-wrapper">
                     <i class="far fa-clock"></i>
                     <input type="time" id="resTime">
@@ -133,30 +117,27 @@
             <button type="button" id="bookingBtn" class="btn-black-sm">Booking</button>
         </div>
 
-        <!-- 슬롯 표시 영역 -->
+        <!-- 슬롯 표시 -->
         <div class="slots-section">
             <h3>Available Time Slots</h3>
             <div class="slots-msg" id="slotsMessage">
                 Select a room and click 'Find Slots' to see availability.
             </div>
             <div class="slots-grid" id="slotsGrid">
-                <!-- JS로 버튼 생성 -->
             </div>
         </div>
 
     </section>
 
-    <!-- 오른쪽 사이드바 (변경 없음) -->
+    <!-- ㅅ이드바  -->
     <aside class="sidebar">
-        <!-- ... (기존 내용 유지) ... -->
         <div class="warning-box">
             If the reservation cancellation is repeated, the reservation may not be possible.
         </div>
-        <!-- ... -->
     </aside>
 </main>
 
-<!-- 푸터 이미지 -->
+<!-- 푸터 -->
 <div class="bottom-images">
     <img src="../static/image/build.png" alt="Building View" class="build-img">
     <img src="../static/image/footer.png" alt="Footer Information" class="footer-img">

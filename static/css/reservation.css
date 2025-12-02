@@ -1,10 +1,9 @@
-/* 기본 리셋 및 폰트 (이전 CSS와 호환) */
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Noto Sans KR', sans-serif; background-color: #f9f9f9; color: #333; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
-/* --- 헤더 스타일 --- */
 .header {
     display: flex;
     justify-content: space-between;
@@ -15,7 +14,7 @@ ul { list-style: none; }
 }
 
 .hufs-logo {
-    height: 60px; /* 로고 크기 조절 */
+    height: 60px;
     width: auto;
 }
 
@@ -65,7 +64,6 @@ ul { list-style: none; }
     border: 1px solid #ccc;
 }
 
-/* --- 메인 레이아웃 --- */
 .main-container {
     display: flex;
     max-width: 1600px;
@@ -83,7 +81,6 @@ ul { list-style: none; }
     max-width: 350px;
 }
 
-/* --- 상단 컨트롤 --- */
 .top-controls {
     display: flex;
     justify-content: space-between;
@@ -113,7 +110,6 @@ ul { list-style: none; }
     min-width: 120px;
 }
 
-/* --- 테이블 스타일 --- */
 .table-container {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -145,7 +141,6 @@ td {
     color: #555;
 }
 
-/* 상태 뱃지 */
 .status-badge {
     padding: 4px 12px;
     border-radius: 20px;
@@ -162,7 +157,6 @@ td {
 .status-occupied { background-color: #2962ff; }/* 파랑 */
 .status-reserved { background-color: #ffab00; color: #333; } /* 노랑 */
 
-/* 페이지네이션 */
 .pagination-area {
     display: flex;
     justify-content: space-between;
@@ -177,7 +171,6 @@ td {
     border: 1px solid #ddd;
 }
 
-/* --- 예약 컨트롤 (Date, Time, Buttons) --- */
 .booking-controls {
     display: flex;
     gap: 15px;
@@ -237,7 +230,6 @@ td {
     background-color: #333;
 }
 
-/* --- 슬롯 섹션 --- */
 .slots-section h3 {
     font-size: 1.1rem;
     color: #555;
@@ -256,25 +248,36 @@ td {
 
 .slots-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
 }
+
 
 .slot-btn {
-    background-color: #ccc; /* 비활성화 색상 (기본) */
-    color: #fff;
-    border: none;
-    padding: 15px;
-    border-radius: 4px;
-    font-weight: 700;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
     cursor: pointer;
-    font-size: 1rem;
-}
-.slot-btn.active {
-    background-color: #bdbdbd; /* 활성화 시 밝은 회색 */
+    border-radius: 5px;
+    transition: all 0.2s;
 }
 
-/* --- 사이드바 스타일 --- */
+.slot-btn:hover {
+    background-color: #e0e0e0;
+}
+
+
+.slot-btn.selected {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+.slot-btn.active {
+    background-color: #bdbdbd;
+}
+
 .warning-box {
     background-color: #111;
     color: #fff;
@@ -317,7 +320,6 @@ td {
     color: #888;
 }
 
-/* 하단 이미지 (공통 재사용 가능) */
 .bottom-images {
     margin-top: 50px;
 }
@@ -326,7 +328,6 @@ td {
     display: block;
 }
 
-/* 사이드바 웹사이트 리스트 (이전 CSS 재사용) */
 .website-list li { display: flex; gap: 15px; margin-bottom: 15px; }
 .site-icon { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
 .site-info { display: flex; flex-direction: column; }

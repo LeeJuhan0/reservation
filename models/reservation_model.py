@@ -1,72 +1,82 @@
-from flask import current_app
 from database import mysql
-
-def get_cursor():
-    return current_app.extensions['mysql'].connection.cursor()
-
-def get_conn():
-    return current_app.extensions['mysql'].connection
 
 class ReservationModel:
     @staticmethod
-    def get_reserved_slots(building_id, date):
-        """
-        특정 날짜, 특정 방에 이미 예약된 시간 슬롯 목록을 반환
-        """
+    def get_booked_slots(room_pk, date):
         cursor = mysql.connection.cursor()
-        # 취소된 예약('Cancelled')은 제외하고 조회
-        query = """
-                SELECT time_slot
-                FROM reservations
-                WHERE building_id = %s AND reservations.date = %s AND status != 0 \
-                """
-        try:
-            cursor.execute(query, (building_id, date))
-            rows = cursor.fetchall()
-            # rows는 [('10:00',), ('14:30',)] 형태이므로 리스트로 변환
-            return [row[0] for row in rows]
-        except Exception as e:
-            print(f"Error fetching reserved slots: {e}")
+        cursor.execute("SELECT building_name, room_no FROM buildings WHERE id = %s", (room_pk,))
+        room_info = cursor.fetchone()
+
+        if not room_info:
+            print(f" 방 {room_pk}에 해당하는 정보가 없습니다.")
             return []
-        finally:
-            cursor.close()
 
-    @staticmethod
-    def is_slot_available(building_id, date, time_slot):
-        """
-        해당 슬롯이 비어있는지 확인 (True: 예약 가능, False: 이미 예약됨)
-        """
-        cursor = mysql.connection.cursor()
+        building_name = room_info[0]
+        target_room_no = room_info[1]
+
+        building_map = {
+            "백년관": 1, "어문학과": 2, "어문학관": 2, "교양관": 3,
+            "자연과학관": 4, "인문경상관": 5, "공학관": 6, "학생회관": 7
+        }
+        target_building_id = building_map.get(building_name, 0)
+
+        print(f">>> 예약 조회 시도: 건물ID={target_building_id}, 호실={target_room_no}, 날짜={date}")
+
         query = """
-                SELECT COUNT(*)
-                FROM reservations
-                WHERE building_id = %s AND reservations.date = %s AND time_slot = %s AND status != 0 \
+                SELECT time_slot FROM reservations
+                WHERE building_id = %s
+                  AND room_no = %s
+                  AND date = %s
+                  AND status = 1 \
                 """
-        try:
-            cursor.execute(query, (building_id, date, time_slot))
-            count = cursor.fetchone()[0]
-            return count == 0
-        except Exception as e:
-            print(f"Error checking slot availability: {e}")
-            return False
-        finally:
-            cursor.close()
+        cursor.execute(query, (target_building_id, target_room_no, date))
+        results = cursor.fetchall()
+        cursor.close()
+        booked_slots = [row[0] for row in results]
+        print(f">>> DB에서 찾은 예약된 시간들: {booked_slots}")
+
+        return booked_slots
 
     @staticmethod
-    def create_reservation(member_id, building_id, date, time_slot, people_count, status='Reserved'):
+    def create_reservation(member_id, room_pk, date, time_slot, people_count):
         cursor = mysql.connection.cursor()
         conn = mysql.connection
+
+        cursor.execute("SELECT building_name, room_no FROM buildings WHERE id = %s", (room_pk,))
+        room_info = cursor.fetchone()
+
+        if not room_info:
+            print(f"Error: Room ID {room_pk} not found.")
+            return False
+
+        building_name = room_info[0]
+        real_room_no = room_info[1]
+
+        # 건물 이름을 기준으로
+        building_map = {
+            "백년관": 1,
+            "어문학관": 2,
+            "교양관": 3,
+            "자연과학관": 4,
+            "인문경상관": 5,
+            "공학관": 6,
+            "학생회관": 7
+        }
+
+        mapped_building_id = building_map.get(building_name, 0)
+        print(f">>> [DEBUG] 예약 저장: {building_name}({mapped_building_id}), 호실:{real_room_no}")
+
         query = """
                 INSERT INTO reservations
-                (member_id, building_id, date, time_slot, people_count, status )
-                VALUES (%s, %s, %s, %s, %s, %s) \
+                (member_id, building_id, room_no, date, time_slot, people_count, status)
+                VALUES (%s, %s, %s, %s, %s, %s, 1) \
                 """
         try:
-            cursor.execute(query, (member_id, building_id, date, time_slot, people_count, status))
+            cursor.execute(query, (member_id, mapped_building_id, real_room_no, date, time_slot, people_count))
             conn.commit()
             return True
         except Exception as e:
-            print(f"Error creating reservation: {e}")
+            print(f"Booking Error: {e}")
             conn.rollback()
             return False
         finally:

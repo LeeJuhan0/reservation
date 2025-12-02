@@ -1,74 +1,55 @@
-from flask import current_app
 from database import mysql
-
-def get_cursor():
-    return current_app.extensions['mysql'].connection.cursor()
-
-def get_conn():
-    return current_app.extensions['mysql'].connection
 
 class BuildingModel:
     @staticmethod
-    def get_rooms_by_filter(building_name=None, room_no=None):
+    def get_rooms_by_filter(building_name=None, room_floor=None):
         cursor = mysql.connection.cursor()
 
-        # 기본 쿼리
         query = "SELECT * FROM buildings WHERE 1=1"
         params = []
 
-        # 건물 필터
-        if building_name and building_name.lower() != 'all':
+        print(f">>> [DEBUG] 검색 요청 받음 - 건물: '{building_name}', 층: '{room_floor}'")
+
+        # 건물 이름 필터
+        if building_name and building_name != "Select Building":
             query += " AND building_name = %s"
             params.append(building_name)
 
-        # 호실 번호 필터
-        if room_no:
-            query += " AND room_no = %s"
-            params.append(room_no)
+        # 층수 필터
+        if room_floor and str(room_floor).strip() != "" and "Select" not in str(room_floor):
+            query += " AND room_floor = %s"
+            params.append(room_floor)
 
-        try:
-            cursor.execute(query, tuple(params))
+        query += " ORDER BY building_name, CAST(room_no AS UNSIGNED), room_floor"
 
-            # 딕셔너리 형태로 변환
-            columns = [col[0] for col in cursor.description]
-            results = [dict(zip(columns, row)) for row in cursor.fetchall()]
-            return results
-        except Exception as e:
-            print(f"Error fetching rooms: {e}")
-            return []
-        finally:
-            cursor.close()
+        print(f">>> [DEBUG] 실행할 쿼리: {query}")
+        print(f">>> [DEBUG] 파라미터: {params}")
 
-    @staticmethod
-    def get_room_by_id(room_id):
-        cursor = mysql.connection.cursor()
-        query = "SELECT * FROM buildings WHERE id = %s"
+        cursor.execute(query, tuple(params))
+        results = cursor.fetchall()
+        cursor.close()
 
-        try:
-            cursor.execute(query, (room_id,))
-            row = cursor.fetchone()
-
-            if row:
-                columns = [col[0] for col in cursor.description]
-                return dict(zip(columns, row))
-            return None
-        except Exception as e:
-            print(f"Error fetching room by id: {e}")
-            return None
-        finally:
-            cursor.close()
+        rooms = []
+        if results:
+            for row in results:
+                rooms.append({
+                    "id": row[0],
+                    "building_name": row[1],
+                    "room_no": row[2],
+                    "room_type": row[3],
+                    "room_floor": row[4],
+                    "desk_type": row[5],
+                    "capacity": row[6],
+                    "availability": row[7],
+                    "remark": row[8]
+                })
+        return rooms
 
     @staticmethod
-    def update_availability(room_id, status_code):
+    def get_room_no_by_id(building_id):
         cursor = mysql.connection.cursor()
-        conn = mysql.connection
-        try:
-            cursor.execute("UPDATE buildings SET availability = %s WHERE id = %s", (status_code, room_id))
-            conn.commit()
-            return True
-        except Exception as e:
-            print(f"Error updating availability: {e}")
-            conn.rollback()
-            return False
-        finally:
-            cursor.close()
+        query = "SELECT room_no FROM buildings WHERE id = %s"
+        cursor.execute(query, (building_id,))
+        result = cursor.fetchone()
+        cursor.close()
+        return result[0] if result else None
