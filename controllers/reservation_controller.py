@@ -67,3 +67,38 @@ def book_room():
         return jsonify({"message": "Booking successful!"}), 200
     else:
         return jsonify({"message": "Booking failed."}), 500
+
+@reservation_bp.route('/mypage', methods=['GET'])
+def my_page():
+    if 'user_id' not in session:
+        return render_template('login.html')
+    return render_template('mypage.html')
+# 예약가져오기 api
+@reservation_bp.route('/api/my-reservations', methods=['GET'])
+def get_my_reservations():
+    if 'user_id' not in session:
+        return jsonify({"message": "Unauthorized"}), 401
+
+    user_id = session['user_id']
+    reservations = ReservationModel.get_reservations_by_member(user_id)
+    return jsonify(reservations), 200
+
+# 예약취소api
+@reservation_bp.route('/api/cancel', methods=['POST'])
+def cancel_reservation():
+    if 'user_id' not in session:
+        return jsonify({"message": "Unauthorized"}), 401
+
+    data = request.json
+    reservation_id = data.get('reservation_id')
+    user_id = session['user_id']
+
+    if not reservation_id:
+        return jsonify({"message": "Missing reservation ID"}), 400
+
+    success = ReservationModel.delete_reservation(reservation_id, user_id)
+
+    if success:
+        return jsonify({"message": "Reservation cancelled successfully."}), 200
+    else:
+        return jsonify({"message": "Failed to cancel. It might be already deleted."}), 400

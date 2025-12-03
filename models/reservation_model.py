@@ -81,3 +81,61 @@ class ReservationModel:
             return False
         finally:
             cursor.close()
+
+    @staticmethod
+    def get_reservations_by_member(member_id):
+        cursor = mysql.connection.cursor()
+
+        # status=1 인(유효한) 예약만 조회, 날짜 순 정렬
+        query = """
+                SELECT id, building_id, room_no, date, time_slot, people_count
+                FROM reservations
+                WHERE member_id = %s AND status = 1
+                ORDER BY date DESC, time_slot ASC \
+                """
+        cursor.execute(query, (member_id,))
+        results = cursor.fetchall()
+        cursor.close()
+
+        id_to_name_map = {
+            1: "백년관", 2: "어문학관", 3: "교양관",
+            4: "자연과학관", 5: "인문경상관", 6: "공학관", 7: "학생회관"
+        }
+
+        reservations = []
+        for row in results:
+            b_id = row[1]
+            b_name = id_to_name_map.get(b_id, "Unknown") # 1 -> 백년관 변환
+
+            reservations.append({
+                "id": row[0],          # 예약 고유 ID (취소할 때 사용)
+                "building_name": b_name,
+                "room_no": row[2],
+                "date": str(row[3]),   # 날짜 객체를 문자열로 변환
+                "time_slot": row[4],
+                "people_count": row[5]
+            })
+
+        return reservations
+
+    # DB 예약 취소하기
+    @staticmethod
+    def delete_reservation(reservation_id, member_id):
+        cursor = mysql.connection.cursor()
+        conn = mysql.connection
+
+        try:
+            query = "DELETE FROM reservations WHERE id = %s AND member_id = %s"
+            cursor.execute(query, (reservation_id, member_id))
+            conn.commit()
+
+            if cursor.rowcount > 0:
+                return True
+            else:
+                return False
+        except Exception as e:
+            print(f"Cancel Error: {e}")
+            conn.rollback()
+            return False
+        finally:
+            cursor.close()
