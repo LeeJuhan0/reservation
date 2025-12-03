@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page - Reservation System</title>
+    <link rel="stylesheet" href="../static/css/reservation.css">
+    <link rel="stylesheet" href="../static/css/mypage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- 헤더 -->
+<header class="header">
+    <div class="header-left">
+        <img src="../static/image/hufs.png" alt="HUFS Logo" class="hufs-logo">
+    </div>
+    <div class="header-right">
+        <a href="/reservation/" class="nav-link">Reservation</a>
+        <a href="#" class="nav-link active">My Page</a> <!-- 현재 페이지 -->
+        <a href="/auth/logout" class="nav-link">Sign Out</a>
+
+        <div class="user-profile">
+            <span id="userName" class="user-name">User Loading...</span>
+            <div class="user-avatar"></div>
+        </div>
+    </div>
+</header>
+
+<!-- 메인  -->
+<main class="main-container" style="display: block; max-width: 1200px; margin: 0 auto;">
+
+    <div class="mypage-header">
+        <h2><i class="fas fa-list-ul"></i> My Reservation List</h2>
+        <p>Check your reservation history and cancel if needed.</p>
+    </div>
+
+    <div class="mypage-content">
+        <table class="mypage-table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time Slot</th>
+                <th>Building</th>
+                <th>Room No</th>
+                <th>People</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="myResTableBody">
+            <!-- 자바스크립트로 데이터 로딩 -->
+            <tr><td colspan="7">Loading data...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</main>
+
+<!-- 푸터 -->
+<div class="bottom-images">
+    <img src="../static/image/footer.png" alt="Footer" class="footer-img" style="width:100%;">
+</div>
+
+<script src="../static/js/mypage.js"></script>
+</body>
+</html>
