@@ -1,28 +1,30 @@
+import pymysql
+pymysql.install_as_MySQLdb()
+
 from flask import Flask, render_template
 from config import Config
-from database import mysql # [중요] 여기서 불러오기
+from database import mysql
 
-# 컨트롤러 블루프린트 임포트
 from controllers.auth_controller import auth_bp
 from controllers.reservation_controller import reservation_bp
 
-app = Flask(__name__, template_folder='views', static_folder='static')
-app.config.from_object(Config)
+application = Flask(__name__, template_folder='views', static_folder='static')
+app = application
+application.config.from_object(Config)
 
-mysql.init_app(app)
+mysql.init_app(application)
 
 # 컨트롤러
-app.register_blueprint(auth_bp)
-app.register_blueprint(reservation_bp)
+application.register_blueprint(auth_bp)
+application.register_blueprint(reservation_bp)
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('login.html')
 
-@app.route('/test')
+@application.route('/test')
 def test_connection():
     try:
-        # mysql 객체를 직접 사용해서 테스트
         cur = mysql.connection.cursor()
         cur.execute("SELECT DATABASE()")
         db_name = cur.fetchone()[0]
@@ -32,4 +34,4 @@ def test_connection():
         return f"<h1>에러 발생!</h1><p>{str(e)}</p>"
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    application.run(debug=True, port=5000)

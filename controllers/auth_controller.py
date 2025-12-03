@@ -15,9 +15,9 @@ def login():
     password = data.get('password')
     user = MemberModel.find_by_email(email)
 
-    if user and user[2] == password:
-        session['user_id'] = user[0]
-        session['user_name'] = user[3] # 이름 저장
+    if user and user['password'] == password:
+        session['user_id'] = user['id']
+        session['user_name'] = user['name'] # 이름 저장
         return jsonify({"message": "Login successful", "redirect": "/reservation"}), 200
     else:
         return jsonify({"message": "Invalid credentials"}), 401
@@ -57,8 +57,8 @@ def register():
             #  가입 성공 후 즉시 로그인
             new_user = MemberModel.find_by_email(email)
             if new_user:
-                session['user_id'] = new_user[0]   # id
-                session['user_name'] = new_user[3] # name
+                session['user_id'] = new_user['id']   # id
+                session['user_name'] = new_user['name']  # name
 
             return jsonify({
                 "message": "Registration successful",

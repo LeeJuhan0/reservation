@@ -73,6 +73,7 @@ def my_page():
     if 'user_id' not in session:
         return render_template('login.html')
     return render_template('mypage.html')
+
 # 예약가져오기 api
 @reservation_bp.route('/api/my-reservations', methods=['GET'])
 def get_my_reservations():

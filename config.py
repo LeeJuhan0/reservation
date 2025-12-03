@@ -1,8 +1,8 @@
 import os
 
 class Config:
-    MYSQL_HOST = 'localhost'
-    MYSQL_USER = 'root'      # 본인의 MySQL 사용자명
-    MYSQL_PASSWORD = '0224'  # 본인의 MySQL 비밀번호
-    MYSQL_DB = 'reservation_system'
-    SECRET_KEY = os.urandom(24)
+    MYSQL_HOST = os.environ.get('DB_HOST', 'localhost')
+    MYSQL_USER = os.environ.get('DB_USER', 'root')
+    MYSQL_PASSWORD = os.environ.get('DB_PASSWORD', 'your_local_password')
+    MYSQL_DB = os.environ.get('DB_NAME', 'reservation_system')
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'local_fixed_key_1234')
